@@ -37,27 +37,37 @@ const cartSlice = createSlice({
         incCartItem : (state, action) =>{
             const index = state.cartItems.findIndex((item)=>item.id===action.payload) ;
             if (index === -1){return}
-            const updatedCart = [...state.cartItems];
-            updatedCart[index].quantity++;
-            updatedCart[index].total+=updatedCart[index].price;
+            // const updatedCart = [...state.cartItems];
+            // updatedCart[index].quantity++;
+            // updatedCart[index].total+=updatedCart[index].price;
+            // state.cartItems = [...updatedCart];
 
-            state.cartItems = [...updatedCart];
+              // Directly mutating the array
+            state.cartItems[index].quantity++;
+            state.cartItems[index].total += state.cartItems[index].price;
         },
         decCartItem : (state, action) =>{
             const index = state.cartItems.findIndex((item)=>item.id===action.payload) ;
-            const updatedCart = [...state.cartItems];
             if (index === -1){return}
-        
-            if(updatedCart[index].quantity===1){
-                updatedCart.splice(index,1);
+            // const updatedCart = [...state.cartItems];
+            // if(updatedCart[index].quantity===1){
+            //     updatedCart.splice(index,1);
+            //     state.cartCount-=1;
+            //     state.cartItems = [...updatedCart];
+            //     return;
+            // }
+            // updatedCart[index].quantity--;
+            // updatedCart[index].total-=updatedCart[index].price;
+            // state.cartItems = [...updatedCart];
+
+            // Directly mutating the array
+            if(state.cartItems[index].quantity===1){
+                state.cartItems.splice(index,1);
                 state.cartCount-=1;
-                state.cartItems = [...updatedCart];
                 return;
             }
-            updatedCart[index].quantity--;
-            updatedCart[index].total-=updatedCart[index].price;
-
-            state.cartItems = [...updatedCart];
+            state.cartItems[index].quantity--;
+            state.cartItems[index].total-=state.cartItems[index].price;
         },
     }
 })

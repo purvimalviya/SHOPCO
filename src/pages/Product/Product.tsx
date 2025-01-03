@@ -7,11 +7,21 @@ import RoundButton from '../../components/common/RoundButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart,incCartItem,decCartItem } from '../../store/cart-slice';
 
-const Product: React.FC = ()=>{
-  const dispatch = useDispatch();
-  const prodCount = useSelector(state=>state.cart.cartItems);
+export let initRender : boolean = true; 
 
+const Product: React.FC = ()=>{
   const {id} = useParams<{id:string}>();
+  const dispatch = useDispatch();
+
+  interface CartItem{
+    id : string;
+    name : string;
+    price : number;
+    quantity : number;
+    total : number;
+  }
+  const cartItems :CartItem[] = useSelector((state:any)=>state.cart.cartItems);
+
 
   interface Product {
     id: string;
@@ -35,13 +45,14 @@ const Product: React.FC = ()=>{
     sizes: []
   })
 
+
   const add= ()=>{
     console.log("added")
     dispatch(addToCart({id:prodItem.id,title:prodItem.name,price:prodItem.price,quantity:1,total:prodItem.price}));
   }
 
   const getProductCount = (productId: string) => {
-    const product = prodCount.find(item => item.id === productId);
+    const product = cartItems.find(item => item.id === productId);
     return product ? product.quantity : 0;
   };
 
@@ -68,7 +79,7 @@ const Product: React.FC = ()=>{
           console.log(id)
           const item = products.find((_)=> _.id===id)
           console.log(item)
-          setProdItem(item)
+          item && setProdItem(item);
       }
       catch(err){
           console.log("Error Ocurred : ", err)
@@ -77,6 +88,30 @@ const Product: React.FC = ()=>{
     getProd();
   },[id])
 
+  useEffect(()=>{
+    const updateCart = async ()=>{
+      try{
+        const response = await fetch('https://reduxcart-cygbit-default-rtdb.firebaseio.com/shopco_cartItems.json',
+          {
+            method : 'PUT',
+            headers : {'Content-Type' : 'application/json'},
+            body : JSON.stringify(cartItems)
+          });
+
+          if(!response.ok){
+            throw new Error("Couldn't update cart on server");
+          }
+      }catch(err){
+        console.log("Error : ", err);
+      }
+    }
+    if(initRender){
+      initRender = false;
+      return;
+    }
+    updateCart();
+  },[cartItems]) //if prod in cart change , cart will be updated in server
+  //but this side effect also runs on initial render, so cart will be updated as default empty, prevent this using initRender true/false
 
   return (
     <div className='flex flex-col items-center justify-center'>
@@ -134,11 +169,16 @@ const Product: React.FC = ()=>{
 
               <div className='w-[95%] bg-custom-gray h-[1.75px] '> </div> 
               <div className='flex flex-row gap-10'>
-                <div className='flex flex-row justify-center items-center w-auto rounded-full gap-8 bg-custom-gray px-5 cs:gap-4'>
-                  <div className='font-semibold text-2xl cursor-pointer cs:text-lg' onClick={()=>decreaseQuantity(prodItem.id)}>-</div>
-                  <div className='text-xl cs:text-base'>{getProductCount(prodItem.id)}</div>
-                  <div className='font-semibold text-2xl cursor-pointer cs:text-lg' onClick={()=>increaseQuantity(prodItem.id)}>+</div>
-                </div>
+                {
+                  getProductCount(prodItem.id)>0 && (
+                    <div className='flex flex-row justify-center items-center w-auto rounded-full gap-8 bg-custom-gray px-5 cs:gap-4'>
+                      <div className='font-semibold text-2xl cursor-pointer cs:text-lg' onClick={()=>decreaseQuantity(prodItem.id)}>-</div>
+                      <div className='text-xl cs:text-base'>{getProductCount(prodItem.id)}</div>
+                      <div className='font-semibold text-2xl cursor-pointer cs:text-lg' onClick={()=>increaseQuantity(prodItem.id)}>+</div>
+                   </div>
+                  )
+                }
+
                 <RoundButton text="Add to Cart" width={'fit'} padding={10} onClick={add}></RoundButton>
               </div>
 

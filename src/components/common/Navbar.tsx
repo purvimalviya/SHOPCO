@@ -1,15 +1,34 @@
-// import React from 'react'
+import {useEffect} from 'react'
 import { Link, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import cart from '../../assets/cart.png'
 import profile from '../../assets/profile.png'
 import search from '../../assets/search.png'
 import searchsm from '../../assets/searchsm.png'
 import burger from '../../assets/burger.png'
+import { updateInitial } from '../../store/cart-slice';
 
 
 const Navbar = ()=> {
+  const dispatch = useDispatch();
   const cartCount = useSelector((state: any) => state.cart.cartCount);
+
+  useEffect(()=>{
+    const getCartItems = async ()=>{
+      try{
+        const response = await fetch('https://reduxcart-cygbit-default-rtdb.firebaseio.com/shopco_cartItems.json');
+        if(!response.ok){
+          throw new Error("Couldn't fetch cart items from db")
+        }
+        const cartItems = await response.json();
+        dispatch(updateInitial(cartItems))
+      }catch(err){
+        console.log("Error : ", err);
+      }
+    }
+    getCartItems();
+  },[dispatch])
+
   return (
     <div className='flex justify-center'>
       <div className='flex flex-row justify-between items-center w-[88%] gap-[1.5vw] py-4 bg-white'>

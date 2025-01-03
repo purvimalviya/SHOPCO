@@ -1,14 +1,23 @@
 
 import T1 from "../../components/common/T1"
 import HorizontalCard from "../../components/Cart/HorizontalCard";
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux";
+
+let initRender:boolean = true;
 
 const Cart  = ()=>{
 
+  interface CartItem{
+    id : string;
+    name : string;
+    price : number;
+    quantity : number;
+    total : number;
+  }
   // geting a list of cart items
   // then the list of products from db
-  const cartItems = useSelector((state: any) => state.cart.cartItems); 
+  const cartItems:CartItem[] = useSelector((state: any) => state.cart.cartItems); 
 
   //then using prod id find that prodct in prod to show img
   interface Product {
@@ -21,7 +30,6 @@ const Cart  = ()=>{
     colors: string[];
     sizes: string[];
   }
-
   const [prod,setProd] = useState<Product[]>([]);
 
   useEffect(()=>{
@@ -43,6 +51,32 @@ const Cart  = ()=>{
     getProd();
     // console.log(prod[0].id)
   },[])
+
+  
+  useEffect(()=>{
+    const updateCart = async ()=>{
+      try{
+        const response = await fetch('https://reduxcart-cygbit-default-rtdb.firebaseio.com/shopco_cartItems.json',
+          {
+            method : 'PUT',
+            headers : {'Content-Type' : 'application/json'},
+            body : JSON.stringify(cartItems)
+          });
+
+          if(!response.ok){
+            throw new Error("Couldn't update cart on server");
+          }
+      }catch(err){
+        console.log("Error : ", err);
+      }
+    }
+    if(initRender){
+      initRender = false;
+      return;
+    }
+    updateCart();
+  },[cartItems]) //if prod in cart change , cart will be updated in server
+  //but this side effect also runs on initial render, so cart will be updated as default empty, prevent this using initRender true/false
 
 
   return (

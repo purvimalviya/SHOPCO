@@ -63,7 +63,6 @@ const Home  = ()=>{
       </div>
 
 
-          {/* USING GRID HERE, FOR A CHANGE FROM FLEXBOX */}
       {/* NewArrival */} 
       <T1 align="center">NEW ARRIVALS</T1>
       <div className="overflow-x-auto  w-full flex justify-center sm:justify-start gap-x-6 scrollbar-hide">
