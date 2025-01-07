@@ -88,29 +88,46 @@ const Product: React.FC = ()=>{
     getProd();
   },[id])
 
-  useEffect(()=>{
-    const updateCart = async ()=>{
-      try{
-        const response = await fetch('https://reduxcart-cygbit-default-rtdb.firebaseio.com/shopco_cartItems.json',
-          {
-            method : 'PUT',
-            headers : {'Content-Type' : 'application/json'},
-            body : JSON.stringify(cartItems)
-          });
-
-          if(!response.ok){
+   useEffect(() => {
+      const updateCart = async () => {
+        try {
+          const authUser = JSON.parse(localStorage.getItem('authUser') || 'null');
+    
+          if (!authUser) {
+            console.log("No authenticated user found. Cart updated locally.");
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            return;
+          }
+    
+          const uid = authUser.uid; 
+          const response = await fetch(
+            `https://reduxcart-cygbit-default-rtdb.firebaseio.com/shopco_cartItems/${uid}.json`,
+            {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(cartItems), // Store the cart items under the user's UID
+            }
+          );
+    
+          if (!response.ok) {
             throw new Error("Couldn't update cart on server");
           }
-      }catch(err){
-        console.log("Error : ", err);
+    
+          console.log(`Cart successfully updated for user: ${uid}`);
+        } catch (err) {
+          console.log("Error updating cart:", err);
+        }
+      };
+    
+      if (initRender) {
+        initRender = false; 
+        return;
       }
-    }
-    if(initRender){
-      initRender = false;
-      return;
-    }
-    updateCart();
-  },[cartItems]) //if prod in cart change , cart will be updated in server
+    
+      updateCart();
+    }, [cartItems]);
+  //using this useffect wherever cart is update using dispatch (more explanation in cart.tsx)
+  //if prod in cart change , cart will be updated in server
   //but this side effect also runs on initial render, so cart will be updated as default empty, prevent this using initRender true/false
 
   return (

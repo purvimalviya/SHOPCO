@@ -8,6 +8,7 @@ import Home from './pages/Home/Home.tsx'
 import Product from './pages/Product/Product.tsx'
 import Cart from './pages/Cart/Cart.tsx'
 import Signup from './pages/Signup/Signup.tsx'
+import Shop from './pages/Shop/Shop.tsx'
 
 import { createBrowserRouter, createRoutesFromElements,Route, RouterProvider} from 'react-router-dom'
 
@@ -17,7 +18,8 @@ const router = createBrowserRouter(
       <Route index element={<Home/>} />
       <Route path="/Product/:id" element={<Product/>} />
       <Route path="/Cart" element={<Cart/>} />
-      <Route path="/Signup" element={<Signup/>} />
+      <Route path="/Profile" element={<Signup/>} />
+      <Route path="/Shop" element={<Shop/>} />
     </Route>
 ))
 

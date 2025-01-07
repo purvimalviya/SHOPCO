@@ -17,14 +17,14 @@ const Popup : React.FC<PopupProps> = ({text , linkText}) => {
     }
 
     return (
-    <div className='flex flex-row bg-black text-white text-center items-center py-1 gap-2 cs:items-end'>
-        <div className='flex-1 flex flex-row gap-2 justify-center flex-wrap text-sm font-thin cs'>
+    <div className='flex flex-row bg-black text-white text-center items-center py-1 gap-2 cs:items-end cs:relative'>
+        <div className='flex-1 flex flex-row gap-2 justify-center flex-wrap text-sm font-thin cs:mx-8'>
             {/* <p className=''> */}
                 <div>{text}</div>
-                <Link to="/Signup" className='cursor-pointer font-medium underline-offset-4 underline decoration-white cs:pb-2'>{linkText}</Link>
+                <Link to="/Profile" className='cursor-pointer font-medium underline-offset-4 underline decoration-white cs:pb-2'>{linkText}</Link>
             {/* </p> */}
         </div>
-        <div onClick={hide} className='cursor-pointer flex-none mr-11 text-2xl sm:mr-4'>
+        <div onClick={hide} className='cursor-pointer flex-none mr-11 text-2xl sm:mr-4 cs:absolute cs:bottom-1 cs:right-0'>
             x
         </div>
     </div>
