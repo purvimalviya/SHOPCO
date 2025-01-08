@@ -105,3 +105,10 @@ export default function Signup() {
     </div>
   )
 }
+
+
+//verify email
+// show categories, explore, breadcrumbs
+// pagination
+//dark mode
+// mailer

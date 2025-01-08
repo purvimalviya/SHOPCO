@@ -7,13 +7,13 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBhTWpQK7nH7IuHMcO7BC9bTm8DihzKwe0",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "reduxcart-cygbit.firebaseapp.com",
   databaseURL: "https://reduxcart-cygbit-default-rtdb.firebaseio.com",
   projectId: "reduxcart-cygbit",
   storageBucket: "reduxcart-cygbit.firebasestorage.app",
   messagingSenderId: "206297385851",
-  appId: "1:206297385851:web:1e85b08847792155b48bde"
+  appId: "1:206297385851:web:12455363773c5cc5b48bde"
 };
 
 // Initialize Firebase
