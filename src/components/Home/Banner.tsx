@@ -1,4 +1,5 @@
 // import React from 'react'
+import { Link } from 'react-router-dom';
 import hero from '../../assets/hero_img.png'
 import RoundButton from '../common/RoundButton';
 
@@ -25,7 +26,9 @@ const Banner = ()=>{
         </p>
 
         {/* RoundButton */}
-        <RoundButton text="Shop Now" padding={10} width="auto sm:w-full"/>
+        <Link to='/Shop' className='w-52 sm:w-full'>
+          <RoundButton text="Shop Now" padding={10} width="auto sm:w-full"/>
+        </Link>
 
         <div className='flex flex-row gap-x-[1.5vw] mt-4 sm:gap-x-14 sm:flex-wrap sm:justify-center'>
             {

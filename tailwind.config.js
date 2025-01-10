@@ -10,7 +10,7 @@ export default {
         'sm': {'max': '1023px'},  // Apply styles below 1024px
         'md': {'max': '767px'},   // Apply styles below 768px
         'lg': {'max': '639px'},   // Apply styles below 640px
-        'cs': {'max': '445px'},   // custom ; Apply styles below 420px
+        'cs': {'max': '454px'},   // custom ; Apply styles below 445px
       },
     },
   },

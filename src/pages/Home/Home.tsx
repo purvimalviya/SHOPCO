@@ -6,10 +6,28 @@ import StylesBox from "../../components/Home/StylesBox"
 import Seperator from "../../components/common/Seperator"
 import ReviewsScrollable from "../../components/Home/ReviewsScrollable"
 import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
 
 const Home  = ()=>{
 
   const brandHighlight : string[] = ['VERSACE', 'ZARA', 'GUCCI', 'PRADA', 'CALVIN KLEIN']
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash === '#new-arrivals') {
+      const element = document.getElementById('new-arrivals');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    else if(location.hash === '#top-sellers'){
+      const element = document.getElementById('top-sellers');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
 
   interface Product {
     id: string;
@@ -63,7 +81,7 @@ const Home  = ()=>{
       </div>
 
 
-      {/* NewArrival */} 
+      {/* NewArrival */} <div id="new-arrivals"></div>
       <T1 align="center">NEW ARRIVALS</T1>
       <div className="overflow-x-auto  w-full flex justify-center sm:justify-start gap-x-6 scrollbar-hide">
         <div className="w-0 flex-shrink-0 sm:w-[20px]"></div>
@@ -82,7 +100,7 @@ const Home  = ()=>{
 
       <Seperator />   
 
-      {/* TopSelling */}
+      {/* TopSelling */} <div id="top-sellers"></div>
       <T1 align="center">TOP SELLING</T1>
       <div className="overflow-x-auto  w-full flex justify-center sm:justify-start gap-x-6 scrollbar-hide">
         <div className="w-0 flex-shrink-0 sm:w-[20px]"></div>

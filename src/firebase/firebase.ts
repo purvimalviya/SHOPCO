@@ -7,7 +7,7 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "reduxcart-cygbit.firebaseapp.com",
   databaseURL: "https://reduxcart-cygbit-default-rtdb.firebaseio.com",
   projectId: "reduxcart-cygbit",

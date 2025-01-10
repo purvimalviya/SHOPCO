@@ -12,6 +12,7 @@ import { updateInitial } from '../../store/cart-slice';
 const Navbar = ()=> {
   const [menuVisibility, setMenuVisibility] = useState<boolean>(false);
   const [searchBar, setSearchBar] = useState<boolean>(false)
+  const [dropdownVisible, setDropdownVisible] = useState<boolean>(false); 
 
   const dispatch = useDispatch();
   const cartCount = useSelector((state: any) => state.cart.cartCount);
@@ -53,7 +54,7 @@ const Navbar = ()=> {
 
   return (
     <div className='flex justify-center '>
-      <div className='flex flex-row justify-between items-center w-[88%] gap-[1.5vw] py-4 bg-white relative'>
+      <div className='flex flex-row justify-between items-center w-[88%] gap-[1.5vw] py-4 bg-white relative' onMouseLeave={()=>setDropdownVisible(false)}>
         <div className="flex flex-row items-center gap-4">
           <div className="hidden sm:flex" onClick={toggleMenu}><img src={burger} alt="" /></div>
           <h1 className='text-[2.25vw] font-extrabold sm:text-xl'><Link to='/'>SHOP.CO</Link></h1>
@@ -61,27 +62,62 @@ const Navbar = ()=> {
           {
             menuVisibility && (
 
-              <div className='fixed top-0 left-0 w-[70vw] h-[100vh] bg-white p-8 z-10'>
+              <div className='fixed top-0 left-0 w-[70vw] h-[100vh] bg-white p-8 z-50'>
                 <ul className='flex flex-col gap-[1.5vw] font-light text-lg'>
                   <div className='flex flex-row justify-between'>
                     <h1 className='text-3xl font-extrabold  mb-5'><Link to='/'>SHOP.CO</Link></h1>
                     <p className='text-xl font-semibold absolute top-2 right-4' onClick={toggleMenu}>X</p>
                   </div>
-                  <li> <NavLink to='/'>Shop</NavLink></li>
-                  <li> <NavLink to='/'>On Sale</NavLink></li>
-                  <li> <NavLink to='/'>New Arrivals</NavLink></li>
-                  <li> <NavLink to='/'>Brands</NavLink></li>
+                  <li> 
+                    <NavLink to='/Shop'>Shop by</NavLink>
+                    <div className='ml-5'>
+                      <div className='flex flex-col gap-2 mt-2'>
+                        <h4 className='font-bold text-blue-900 text-sm'>Women</h4>
+                        <p className='text-lg text-gray-500 font-semibold'>Someee</p>
+                        <p className='text-lg text-gray-500 font-semibold'>Someee</p>
+                        <p className='text-lg text-gray-500 font-semibold'>Someee</p>
+                      </div>
+                      <div className='flex flex-col gap-2 mt-2'>
+                        <h4 className='font-bold text-blue-900 text-sm'>Men</h4>
+                        <p className='text-lg text-gray-500 font-semibold'>Someee</p>
+                        <p className='text-lg text-gray-500 font-semibold'>Someee</p>
+                        <p className='text-lg text-gray-500 font-semibold'>Someee</p>
+                      </div>
+                    </div>
+                  </li>
+                  <li> <NavLink to='/#new-arrivals'>New Arrivals</NavLink></li>
+                  <li> <NavLink to='/#top-sellers'>Bestsellers</NavLink></li>
                 </ul>
               </div>
             )
           }
         </div>
 
-        <ul className='flex gap-[1.5vw] font-normal text-base sm:hidden'>
-            <li> <NavLink to='/'>Shop</NavLink></li>
-            <li> <NavLink to='/'>On Sale</NavLink></li>
-            <li> <NavLink to='/'>New Arrivals</NavLink></li>
-            <li> <NavLink to='/'>Brands</NavLink></li>
+        <ul className='flex gap-[3vw] font-normal text-base sm:hidden relative'>
+            <li onMouseEnter={()=>setDropdownVisible(true)} > <NavLink to='/Shop'>Shop by</NavLink></li>
+            {
+              dropdownVisible && (
+
+                <div className='absolute bg-white top-12  flex flex-row py-10 px-16 gap-20 justify-between'>
+                  <div className='flex flex-col gap-2'>
+                    <h4 className='font-bold text-blue-900 text-sm'>Women</h4>
+                    <p className='text-lg text-gray-500 font-semibold'>Someee</p>
+                    <p className='text-lg text-gray-500 font-semibold'>Someee</p>
+                    <p className='text-lg text-gray-500 font-semibold'>Someee</p>
+                  </div>
+
+                  <div className='flex flex-col gap-2'>
+                    <h4 className='font-bold text-blue-900 text-sm'>Men</h4>
+                    <p className='text-lg text-gray-500 font-semibold'>Someee</p>
+                    <p className='text-lg text-gray-500 font-semibold'>Someee</p>
+                    <p className='text-lg text-gray-500 font-semibold'>Someee</p>
+                  </div>
+
+                </div>
+              )
+            }
+            <li onMouseEnter={()=>setDropdownVisible(false)}> <NavLink to='/#new-arrivals'>New Arrivals</NavLink></li>
+            <li onMouseEnter={()=>setDropdownVisible(false)}> <NavLink to='/#top-sellers'>Bestsellers</NavLink></li>
         </ul>
 
         <div className='flex items-center gap-4 bg-custom-gray rounded-full px-4 py-2 w-[42%] sm:hidden'>
