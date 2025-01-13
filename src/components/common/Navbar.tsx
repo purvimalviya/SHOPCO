@@ -6,6 +6,8 @@ import profile from '../../assets/profile.png'
 import search from '../../assets/search.png'
 import searchsm from '../../assets/searchsm.png'
 import burger from '../../assets/burger.png'
+import { men_category } from '../../lib/constants';
+import { women_category } from '../../lib/constants';
 import { updateInitial } from '../../store/cart-slice';
 
 
@@ -72,16 +74,20 @@ const Navbar = ()=> {
                     <NavLink to='/Shop'>Shop by</NavLink>
                     <div className='ml-5'>
                       <div className='flex flex-col gap-2 mt-2'>
-                        <h4 className='font-bold text-blue-900 text-sm'>Women</h4>
-                        <p className='text-lg text-gray-500 font-semibold'>Someee</p>
-                        <p className='text-lg text-gray-500 font-semibold'>Someee</p>
-                        <p className='text-lg text-gray-500 font-semibold'>Someee</p>
+                        <h4 className='font-bold text-blue-900 text-sm cursor-pointer'><Link to="/Shop/Women">Women</Link></h4>
+                        {
+                          women_category.map((i)=>(
+                            <p className='text-lg text-gray-500 font-semibold'><Link to={`/Shop/Women/${i}`}>{i}</Link></p>
+                          ))
+                        }
                       </div>
                       <div className='flex flex-col gap-2 mt-2'>
-                        <h4 className='font-bold text-blue-900 text-sm'>Men</h4>
-                        <p className='text-lg text-gray-500 font-semibold'>Someee</p>
-                        <p className='text-lg text-gray-500 font-semibold'>Someee</p>
-                        <p className='text-lg text-gray-500 font-semibold'>Someee</p>
+                        <h4 className='font-bold text-blue-900 text-sm cursor-pointer'><Link to="/Shop/Men">Men</Link></h4>
+                        {
+                          men_category.map((i)=>(
+                            <p className='text-lg text-gray-500 font-semibold'><Link to={`/Shop/Men/${i}`}>{i}</Link></p>
+                          ))
+                        }
                       </div>
                     </div>
                   </li>
@@ -99,18 +105,22 @@ const Navbar = ()=> {
               dropdownVisible && (
 
                 <div className='absolute bg-white top-12  flex flex-row py-10 px-16 gap-20 justify-between'>
-                  <div className='flex flex-col gap-2'>
-                    <h4 className='font-bold text-blue-900 text-sm'>Women</h4>
-                    <p className='text-lg text-gray-500 font-semibold'>Someee</p>
-                    <p className='text-lg text-gray-500 font-semibold'>Someee</p>
-                    <p className='text-lg text-gray-500 font-semibold'>Someee</p>
+                  <div className='flex flex-col gap-2 w-max'>
+                    <h4 className='font-bold text-blue-900 text-sm cursor-pointer'><Link to="/Shop/Women">Women</Link></h4>
+                    {
+                      women_category.map((i)=>(
+                        <p className='text-lg text-gray-500 font-semibold'><Link to={`/Shop/Women/${i}`}>{i}</Link></p>
+                      ))
+                    }
                   </div>
 
-                  <div className='flex flex-col gap-2'>
-                    <h4 className='font-bold text-blue-900 text-sm'>Men</h4>
-                    <p className='text-lg text-gray-500 font-semibold'>Someee</p>
-                    <p className='text-lg text-gray-500 font-semibold'>Someee</p>
-                    <p className='text-lg text-gray-500 font-semibold'>Someee</p>
+                  <div className='flex flex-col gap-2 w-max'>
+                    <h4 className='font-bold text-blue-900 text-sm'><Link to="/Shop/Men">Men</Link></h4>
+                    {
+                      men_category.map((i)=>(
+                        <p className='text-lg text-gray-500 font-semibold'><Link to={`/Shop/Men/${i}`}>{i}</Link></p>
+                      ))
+                    }
                   </div>
 
                 </div>

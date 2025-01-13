@@ -6,10 +6,15 @@ import Stars from '../../components/common/Stars';
 import RoundButton from '../../components/common/RoundButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart,incCartItem,decCartItem } from '../../store/cart-slice';
+import { useLocation } from 'react-router-dom';
 
-export let initRender : boolean = true; 
+let initRender : boolean = true; 
+
 
 const Product: React.FC = ()=>{
+  const location = useLocation()
+  console.log(location.pathname)
+
   const {id} = useParams<{id:string}>();
   const dispatch = useDispatch();
 
