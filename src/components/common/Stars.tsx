@@ -7,9 +7,9 @@ const Stars:React.FC<{rating:number}> = ({rating})=>{
           <div className='flex flex-row gap-1 items-center text-base text-gray-500'>
   
               {
-                  [...Array(Math.floor(rating))].map((_)=>{
+                  [...Array(Math.floor(rating))].map((_,ind)=>{
                       // return <div>⭐</div>
-                      return <img src={star_full} className='w-4 h-4'/>
+                      return <img key={ind} src={star_full} className='w-4 h-4'/>
                   })
               }
   

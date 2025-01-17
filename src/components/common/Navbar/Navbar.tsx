@@ -1,15 +1,15 @@
 import {useEffect, useState} from 'react'
 import { Link, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import cart from '../../assets/cart.png'
-import profile from '../../assets/profile.png'
-import search from '../../assets/search.png'
-import searchsm from '../../assets/searchsm.png'
-import burger from '../../assets/burger.png'
-import { men_category } from '../../lib/constants';
-import { women_category } from '../../lib/constants';
-import { updateInitial } from '../../store/cart-slice';
-
+import cart from '../../../assets/cart.png'
+import profile from '../../../assets/profile.png'
+import search from '../../../assets/search.png'
+import searchsm from '../../../assets/searchsm.png'
+import burger from '../../../assets/burger.png'
+import { men_category } from '../../../lib/constants';
+import { women_category } from '../../../lib/constants';
+import { updateInitial } from '../../../store/cart-slice';
+import Coontainer from './Coontainer';
 
 const Navbar = ()=> {
   const [menuVisibility, setMenuVisibility] = useState<boolean>(false);
@@ -60,6 +60,8 @@ const Navbar = ()=> {
         <div className="flex flex-row items-center gap-4">
           <div className="hidden sm:flex" onClick={toggleMenu}><img src={burger} alt="" /></div>
           <h1 className='text-[2.25vw] font-extrabold sm:text-xl'><Link to='/'>SHOP.CO</Link></h1>
+
+          {/* <Coontainer /> */}
 
           {
             menuVisibility && (
@@ -134,6 +136,7 @@ const Navbar = ()=> {
             <div className='text-gray-400'><img src={search} alt="" /></div>
             <input type="text" placeholder='Search for products' className='bg-transparent focus:outline-none placeholder:text-gray-400' />
         </div>
+
 
         <div className='flex gap-[1.5vw] sm:gap-6'>
               <img src={searchsm} alt="" className="hidden sm:flex" onClick={()=>setSearchBar(true)}/>

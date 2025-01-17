@@ -142,6 +142,4 @@ export default Shop
 
 //otp email verify
 //lazy-loading, loader
-//breadcrumbs
-//category filters
-//mailer
+//dark mode
