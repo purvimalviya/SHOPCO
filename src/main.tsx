@@ -1,41 +1,86 @@
-// import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { Provider } from 'react-redux'
-import store from './store/store.tsx'
-import './index.css'
-import App from './App.tsx'
-import Home from './pages/Home/Home.tsx'
-import Product from './pages/Product/Product.tsx'
-import Cart from './pages/Cart/Cart.tsx'
-import Signup from './pages/Signup/Signup.tsx'
-import Shop from './pages/Shop/Shop.tsx'
+import { lazy, Suspense } from 'react';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { createBrowserRouter, Route, createRoutesFromElements, RouterProvider } from 'react-router-dom';
+import store from './store/store';
+import './index.css';
+import App from './App';
 
-import { createBrowserRouter, createRoutesFromElements,Route, RouterProvider} from 'react-router-dom'
+// Lazy load pages
+const Home = lazy(() => import('./pages/Home/Home'));
+const Product = lazy(() => import('./pages/Product/Product'));
+const Cart = lazy(() => import('./pages/Cart/Cart'));
+const Signup = lazy(() => import('./pages/Signup/Signup'));
+const Shop = lazy(() => import('./pages/Shop/Shop'));
+
+// Import spinner
+import FullPageSpinner from './components/common/Spinner';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App/>}> 
-      <Route index element={<Home/>} />
-      <Route path="/Product/:id" element={<Product/>} />
-      <Route path="/Cart" element={<Cart/>} />
-      <Route path="/Profile" element={<Signup/>} />
-      <Route path="/Shop" element={<Shop/>} />
-
-      <Route path="/Shop/:gender" element={<Shop />} />
-      <Route path="/Shop/:gender/:category" element={<Shop />} />
-      
+    <Route path="/" element={<App />}>
+      <Route
+        index
+        element={
+          <Suspense fallback={<FullPageSpinner />}>
+            <Home />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/Product/:id"
+        element={
+          <Suspense fallback={<FullPageSpinner />}>
+            <Product />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/Cart"
+        element={
+          <Suspense fallback={<FullPageSpinner />}>
+            <Cart />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/Profile"
+        element={
+          <Suspense fallback={<FullPageSpinner />}>
+            <Signup />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/Shop"
+        element={
+          <Suspense fallback={<FullPageSpinner />}>
+            <Shop />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/Shop/:gender"
+        element={
+          <Suspense fallback={<FullPageSpinner />}>
+            <Shop />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/Shop/:gender/:category"
+        element={
+          <Suspense fallback={<FullPageSpinner />}>
+            <Shop />
+          </Suspense>
+        }
+      />
     </Route>
-))
-
-// later keep product page as per specific product
-// and make home page at /
+  )
+);
 
 createRoot(document.getElementById('root')!).render(
-  // <StrictMode>
-  //   <App />
-  // </StrictMode>,
-
   <Provider store={store}>
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
   </Provider>
-)
+);

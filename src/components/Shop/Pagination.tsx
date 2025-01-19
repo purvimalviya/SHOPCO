@@ -37,7 +37,7 @@ const Pagination = ({totalItems, itemsPerPage, setCurrentItems}:{totalItems:numb
         </button>
 
         {Array.from({ length: totalPages }, (_, i) => (
-          <button key={i} onClick={() => goToPage(i + 1)} className="mx-1">
+          <button key={i} onClick={() => goToPage(i + 1)} className={`mx-1 ${currentPage==i+1?'font-bold border-b-2 border-blue-700':''} `}>
             {i + 1}
           </button>
         ))}

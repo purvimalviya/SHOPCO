@@ -1,45 +1,24 @@
-import React from 'react'
-import { useParams } from 'react-router-dom';
-import { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { addToCart, incCartItem, decCartItem } from '../../store/cart-slice';
 import T1 from '../../components/common/T1';
 import Stars from '../../components/common/Stars';
 import RoundButton from '../../components/common/RoundButton';
-import { useSelector, useDispatch } from 'react-redux';
-import { addToCart,incCartItem,decCartItem } from '../../store/cart-slice';
-import { useLocation } from 'react-router-dom';
+import Spinner from '../../components/common/Spinner';
 
-let initRender : boolean = true; 
+let initRender: boolean = true;
 
+const Product: React.FC = () => {
+  const location = useLocation();
+  console.log(location.pathname);
 
-const Product: React.FC = ()=>{
-  const location = useLocation()
-  console.log(location.pathname)
-
-  const {id} = useParams<{id:string}>();
+  const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
 
-  interface CartItem{
-    id : string;
-    name : string;
-    price : number;
-    quantity : number;
-    total : number;
-  }
-  const cartItems :CartItem[] = useSelector((state:any)=>state.cart.cartItems);
+  const cartItems = useSelector((state: any) => state.cart.cartItems);
 
-
-  interface Product {
-    id: string;
-    name: string;
-    price: number;
-    img: string;
-    rating: number;
-    description?: string;
-    colors: string[];
-    sizes: string[];
-  }
-  // const [prod,setProd] = useState<Product[]>([])
-  const [prodItem,setProdItem] = useState<Product>({
+  const [prodItem, setProdItem] = useState({
     id: '',
     name: '',
     price: 0,
@@ -47,17 +26,17 @@ const Product: React.FC = ()=>{
     rating: 0,
     description: '',
     colors: [],
-    sizes: []
-  })
+    sizes: [],
+  });
+  const [loading, setLoading] = useState<boolean>(true); // Loading state
 
-
-  const add= ()=>{
-    console.log("added")
-    dispatch(addToCart({id:prodItem.id,title:prodItem.name,price:prodItem.price,quantity:1,total:prodItem.price}));
-  }
+  const add = () => {
+    console.log('added');
+    dispatch(addToCart({ id: prodItem.id, title: prodItem.name, price: prodItem.price, quantity: 1, total: prodItem.price }));
+  };
 
   const getProductCount = (productId: string) => {
-    const product = cartItems.find(item => item.id === productId);
+    const product = cartItems.find((item: any) => item.id === productId);
     return product ? product.quantity : 0;
   };
 
@@ -69,29 +48,33 @@ const Product: React.FC = ()=>{
     dispatch(decCartItem(productId)); // Decrement the quantity of the product
   };
 
-  useEffect(()=>{
-    const getProd = async ()=>{
-      try{
-          const response = await fetch('https://reduxcart-cygbit-default-rtdb.firebaseio.com/shopco_products.json')
-    
-          if(!response.ok){
-            throw new Error("Couldnt fetch products")
-          }
-          const products:Product[] = await response.json();
-          console.log(products)
-          // setProd(products);
+  useEffect(() => {
+    const getProd = async () => {
+      try {
+        setLoading(true); // Set loading to true before fetching
+        const response = await fetch('https://reduxcart-cygbit-default-rtdb.firebaseio.com/shopco_products.json');
 
-          console.log(id)
-          const item = products.find((_)=> _.id===id)
-          console.log(item)
-          item && setProdItem(item);
+        if (!response.ok) {
+          throw new Error('Couldn\'t fetch products');
+        }
+
+        const products = await response.json();
+        console.log(products);
+        console.log(id);
+        const item = products.find((_: any) => _.id === id);
+        console.log(item);
+
+        if (item) {
+          setProdItem(item);
+        }
+      } catch (err) {
+        console.log('Error occurred:', err);
+      } finally {
+        setLoading(false); // Set loading to false after fetching is complete
       }
-      catch(err){
-          console.log("Error Ocurred : ", err)
-      }
-    }
+    };
     getProd();
-  },[id])
+  }, [id]);
 
    useEffect(() => {
       const updateCart = async () => {
@@ -139,6 +122,11 @@ const Product: React.FC = ()=>{
     <div className='flex flex-col items-center justify-center'>
         <div className='w-[88%] bg-custom-gray h-[2px] mb-10'> </div> 
 
+        {loading ? (
+        <div className="flex items-center justify-center min-h-screen">
+          <Spinner />
+        </div>
+        ) : (
         <div className='w-[88%] flex flex-row justify-center gap-6 sm:flex-wrap'>
 
           <div className='w-[600px] flex flex-row gap-4 justify-between h-[500px] sm:flex-col sm:justify-start sm:h-auto'>
@@ -207,7 +195,10 @@ const Product: React.FC = ()=>{
 
           </div>
 
+                
         </div>
+
+              )}
     </div> 
   )
 }

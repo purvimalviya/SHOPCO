@@ -28,29 +28,8 @@ import 'rc-slider/assets/index.css';
     <div className="bg-white border-gray-300 border-[2px] rounded-xl h-fit p-6 flex flex-col gap-6">
         <div className="flex flex-row justify-between border-gray-300 border-b-[2px] pb-3">
           <h3 className="font-bold text-lg">Filter by</h3>
-          <div onClick={ ()=>{setFilterVisible(false)} }>X</div>
+          <div onClick={ ()=>{setFilterVisible(false)} } className='md:flex hidden' >X</div>
         </div>
-
-        {/* <div>
-          <h2 className="mb-4 text-sm text-gray-500">Categories</h2>
-          <div className="flex flex-row gap-2 flex-wrap">
-            {
-              // Array.from(new Set([...women_category,...men_category])).map((item)=>
-              category_tags.map((item)=>
-                <div className="px-3 py-2 bg-custom-gray rounded-full">{item}</div>
-              )
-            }
-          </div>
-        </div>
-
-        <div>
-          <h2 className="mb-4 text-sm text-gray-500">Gender</h2>
-          <div className="flex flex-row gap-3 flex-wrap">
-            <div className="px-3 py-2 bg-custom-gray rounded-full">Women</div>
-            <div className="px-3 py-2 bg-custom-gray rounded-full">Men</div>
-            <div className="px-3 py-2 bg-custom-gray rounded-full">All</div>            
-          </div>
-        </div> */}
 
         <div>
           <h2 className="mb-4 text-sm text-gray-500">Price</h2>
@@ -66,6 +45,7 @@ import 'rc-slider/assets/index.css';
               step={10}
               value={priceRange}
               onChange={handleChange}
+    
             />
           </div>
         </div>
@@ -75,18 +55,16 @@ import 'rc-slider/assets/index.css';
           {/* <div>X</div> */}
         </div>
         <div className="flex flex-col gap-3">
-          {/* <div className="px-3 py-2 bg-custom-gray rounded-full">Price : High to Low</div>
-          <div className="px-3 py-2 bg-custom-gray rounded-full">Price : Low to High</div> */}
 
           <div
-            className={`px-3 py-2 rounded-full ${sortOrder === 'lowToHigh' ? 'bg-custom-gray' : ''}`}
+            className={`px-3 py-2 rounded-full cursor-pointer ${sortOrder === 'lowToHigh' ? 'bg-slate-100' : ''}`}
             onClick={() => handleSortChange('lowToHigh')}
           >
             Price: Low to High
           </div>
 
           <div
-            className={`px-3 py-2 rounded-full ${sortOrder === 'highToLow' ? 'bg-custom-gray' : ''}`}
+            className={`px-3 py-2 rounded-full cursor-pointer ${sortOrder === 'highToLow' ? 'bg-slate-100' : ''}`}
             onClick={() => handleSortChange('highToLow')}
           >
             Price: High to Low
@@ -96,7 +74,7 @@ import 'rc-slider/assets/index.css';
 
 
         <button
-        className="mt-4 bg-blue-800 text-white p-2 rounded-full"
+        className="mt-4 bg-slate-700 text-white p-2 rounded-full"
         onClick={applyFilters}
         >
           Apply Filters

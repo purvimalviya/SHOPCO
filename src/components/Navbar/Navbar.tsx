@@ -1,15 +1,17 @@
 import {useEffect, useState} from 'react'
 import { Link, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import cart from '../../../assets/cart.png'
-import profile from '../../../assets/profile.png'
-import search from '../../../assets/search.png'
-import searchsm from '../../../assets/searchsm.png'
-import burger from '../../../assets/burger.png'
-import { men_category } from '../../../lib/constants';
-import { women_category } from '../../../lib/constants';
-import { updateInitial } from '../../../store/cart-slice';
-import Coontainer from './Coontainer';
+import cart from '../../assets/cart.png'
+import profile from '../../assets/profile.png'
+// import search from '../../assets/search.png'
+import searchsm from '../../assets/searchsm.png'
+import burger from '../../assets/burger.png'
+import { men_category } from '../../lib/constants';
+import { women_category } from '../../lib/constants';
+import { updateInitial } from '../../store/cart-slice';
+import Searchbar from './Searchbar';
+import SearchbarSM from './SearchbarSM';
+// import Container from './Container';
 
 const Navbar = ()=> {
   const [menuVisibility, setMenuVisibility] = useState<boolean>(false);
@@ -106,7 +108,7 @@ const Navbar = ()=> {
             {
               dropdownVisible && (
 
-                <div className='absolute bg-white top-12  flex flex-row py-10 px-16 gap-20 justify-between'>
+                <div className='absolute bg-white top-12  flex flex-row py-10 px-16 gap-20 justify-between z-50 shadow-lg'>
                   <div className='flex flex-col gap-2 w-max'>
                     <h4 className='font-bold text-blue-900 text-sm cursor-pointer'><Link to="/Shop/Women">Women</Link></h4>
                     {
@@ -132,23 +134,14 @@ const Navbar = ()=> {
             <li onMouseEnter={()=>setDropdownVisible(false)}> <NavLink to='/#top-sellers'>Bestsellers</NavLink></li>
         </ul>
 
-        <div className='flex items-center gap-4 bg-custom-gray rounded-full px-4 py-2 w-[42%] sm:hidden'>
-            <div className='text-gray-400'><img src={search} alt="" /></div>
-            <input type="text" placeholder='Search for products' className='bg-transparent focus:outline-none placeholder:text-gray-400' />
-        </div>
+        <Searchbar />
 
 
         <div className='flex gap-[1.5vw] sm:gap-6'>
               <img src={searchsm} alt="" className="hidden sm:flex" onClick={()=>setSearchBar(true)}/>
               {
                 searchBar && (
-                  <div className='flex items-center bg-custom-gray rounded-full px-4 py-2 absolute right-0 top-3 z-10 cs:w-full justify-between'>
-                    <input type="text" placeholder='Search for products' className='bg-transparent focus:outline-none placeholder:text-gray-400' />
-                    <div className='flex items-center'>
-                      <div className='text-gray-400'><img src={search} alt="" /></div>
-                      <div className='text-gray-400 ml-2 font-semibold text-xl' onClick={()=>setSearchBar(false)}>X</div>
-                    </div>
-                  </div>
+                  <SearchbarSM setSearchBar={setSearchBar} />
                 )
               }
             

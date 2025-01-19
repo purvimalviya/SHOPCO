@@ -1,5 +1,5 @@
-import T1 from "../T1"
-import RoundButton from "../RoundButton"
+import T1 from "../common/T1"
+import RoundButton from "../common/RoundButton"
 import { useState } from "react";
 import emailjs from "emailjs-com";
 

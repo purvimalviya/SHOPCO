@@ -2,8 +2,8 @@
 import './App.css'
 import { useSelector } from 'react-redux'
 import Popup from './components/common/Popup'
-import Navbar from './components/common/Navbar/Navbar';
-import Footer from './components/common//Footer/Footer';
+import Navbar from './components/Navbar/Navbar';
+import Footer from './components/Footer/Footer';
 import { Outlet } from 'react-router-dom';
 
 function App() {
@@ -32,5 +32,3 @@ function App() {
 
 export default App
 
-
-// confusion : in pages folder, directly make tsx files or make different page folders?

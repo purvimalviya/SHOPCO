@@ -1,7 +1,7 @@
 // using useLocation
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-
+import filter from '../../assets/filter.png'
 import FilterPane from '../../components/Shop/FilterPane';
 import ShopCard from '../../components/Shop/ShopCard';
 import Pagination from '../../components/Shop/Pagination';
@@ -107,7 +107,9 @@ const Shop = () => {
           )
         }
         <div className="flex flex-row justify-between">
-          <div className="md:flex hidden" onClick={()=>{setFilterVisible(true)}}>X</div>
+          <div className="md:flex hidden" onClick={()=>{setFilterVisible(true)}}>
+            <img src={filter} alt="filter" className='h-5 mt-1' />
+          </div>
           <div>
             <Breadcrumbs />
           </div>

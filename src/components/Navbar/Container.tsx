@@ -1,3 +1,4 @@
+//this component isn't in use anywhere, it is for dev's reference and debugging 
 import { Suspense, useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import Loader from './Loader';
@@ -79,7 +80,7 @@ const SearchResults = ({resource,setResource}:any) => {
   );
 };
 
-const Coontainer = () => {
+const Container = () => {
   console.log("container rendered 1") 
   const [query, setQuery] = useState<string>(''); // Store the search query
   const [resource, setResource] = useState<any>(null); // Initial fetch
@@ -126,7 +127,7 @@ const Coontainer = () => {
   );
 };
 
-export default Coontainer;
+export default Container;
 
 // import { Suspense, useEffect, useState, useRef} from 'react';
 // import { Link } from 'react-router-dom';
