@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>You're Offline</title>
+  <style>
+    /* Reset Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      overflow: hidden;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+      background: linear-gradient(145deg, #f3f3f3, #ffffff);
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    .icon {
+      font-size: 80px;
+      color: #e74c3c;
+      margin-bottom: 20px;
+      animation: bounce 1.5s infinite ease-in-out;
+    }
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    h1 {
+      font-size: 4vw;
+      color: #222;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 2vw;
+      color: #555;
+      margin-bottom: 30px;
+      max-width: 400px;
+      line-height: 1.5;
+      text-align: center;
+    }
+    .reload-button {
+      padding: 12px 25px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 25px;
+      box-shadow: 0px 4px 6px rgba(52, 152, 219, 0.4);
+      transition: all 0.3s ease;
+    }
+    .reload-button:hover {
+      background-color: #2980b9;
+      transform: translateY(-2px);
+      box-shadow: 0px 6px 12px rgba(41, 128, 185, 0.4);
+    }
+    .reload-button:active {
+      transform: translateY(2px);
+      box-shadow: 0px 2px 4px rgba(41, 128, 185, 0.4);
+    }
+    footer {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    footer span {
+      color: #3498db;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="icon">&#128681;</div> <!-- Icon for offline (🚫) -->
+    <h1>Oops! No Internet Connection</h1>
+    <p>It seems like you're offline. Please check your network connection and try reloading the page.</p>
+    <button class="reload-button" onclick="window.location.href = '/'">Go to Homepage</button>
+    <footer>
+      <p>Powered by <span>Shop.Co</span></p>
+    </footer>
+  </div>
+</body>
+</html>

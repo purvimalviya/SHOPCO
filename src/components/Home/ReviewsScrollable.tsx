@@ -41,8 +41,8 @@ const ReviewsScrollable = ()=>{
           id="scrollableContainer"
           className='flex gap-3 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory'>
             <div className='w-10 flex-shrink-0'></div>
-          {reviews.map((review) => (
-            <ReviewCard name={review.name} text={review.text} rating={review.rating}></ReviewCard>
+          {reviews.map((review,i) => (
+            <ReviewCard key={i} name={review.name} text={review.text} rating={review.rating}></ReviewCard>
           ))}
         </div>
      </>

@@ -63,7 +63,7 @@ const Navbar = ()=> {
           <div className="hidden sm:flex" onClick={toggleMenu}><img src={burger} alt="" /></div>
           <h1 className='text-[2.25vw] font-extrabold sm:text-xl'><Link to='/'>SHOP.CO</Link></h1>
 
-          {/* <Coontainer /> */}
+          {/* <Container /> */}
 
           {
             menuVisibility && (
@@ -80,16 +80,16 @@ const Navbar = ()=> {
                       <div className='flex flex-col gap-2 mt-2'>
                         <h4 className='font-bold text-blue-900 text-sm cursor-pointer'><Link to="/Shop/Women">Women</Link></h4>
                         {
-                          women_category.map((i)=>(
-                            <p className='text-lg text-gray-500 font-semibold'><Link to={`/Shop/Women/${i}`}>{i}</Link></p>
+                          women_category.map((i,_)=>(
+                            <p key={_} className='text-lg text-gray-500 font-semibold'><Link to={`/Shop/Women/${i}`}>{i}</Link></p>
                           ))
                         }
                       </div>
                       <div className='flex flex-col gap-2 mt-2'>
                         <h4 className='font-bold text-blue-900 text-sm cursor-pointer'><Link to="/Shop/Men">Men</Link></h4>
                         {
-                          men_category.map((i)=>(
-                            <p className='text-lg text-gray-500 font-semibold'><Link to={`/Shop/Men/${i}`}>{i}</Link></p>
+                          men_category.map((i,_)=>(
+                            <p key={_} className='text-lg text-gray-500 font-semibold'><Link to={`/Shop/Men/${i}`}>{i}</Link></p>
                           ))
                         }
                       </div>
@@ -112,8 +112,8 @@ const Navbar = ()=> {
                   <div className='flex flex-col gap-2 w-max'>
                     <h4 className='font-bold text-blue-900 text-sm cursor-pointer'><Link to="/Shop/Women">Women</Link></h4>
                     {
-                      women_category.map((i)=>(
-                        <p className='text-lg text-gray-500 font-semibold'><Link to={`/Shop/Women/${i}`}>{i}</Link></p>
+                      women_category.map((i,_)=>(
+                        <p key={_} className='text-lg text-gray-500 font-semibold'><Link to={`/Shop/Women/${i}`}>{i}</Link></p>
                       ))
                     }
                   </div>
@@ -121,8 +121,8 @@ const Navbar = ()=> {
                   <div className='flex flex-col gap-2 w-max'>
                     <h4 className='font-bold text-blue-900 text-sm'><Link to="/Shop/Men">Men</Link></h4>
                     {
-                      men_category.map((i)=>(
-                        <p className='text-lg text-gray-500 font-semibold'><Link to={`/Shop/Men/${i}`}>{i}</Link></p>
+                      men_category.map((i,_)=>(
+                        <p key={_} className='text-lg text-gray-500 font-semibold'><Link to={`/Shop/Men/${i}`}>{i}</Link></p>
                       ))
                     }
                   </div>

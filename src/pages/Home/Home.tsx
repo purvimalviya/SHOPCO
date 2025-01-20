@@ -63,15 +63,14 @@ const Home  = ()=>{
 
   return (
     <div>
-      {/* Banner */}
       <Banner></Banner>
 
       {/* Brands Belt */}
       <div className='bg-black text-white flex justify-center'>
         <div className='py-6 flex flex-wrap gap-x-[6vw] gap-y-4 justify-center items-center w-[88%] sm:w-[95%]'>
-          { brandHighlight.map((brand)=>{
+          { brandHighlight.map((brand,i)=>{
             return (
-            <div className='font-semibold text-5xl sm:text-3xl sm:mx-2'>
+            <div key={i} className='font-semibold text-5xl sm:text-3xl sm:mx-2'>
               {brand}
             </div>
             )

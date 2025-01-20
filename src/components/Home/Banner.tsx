@@ -32,9 +32,9 @@ const Banner = ()=>{
 
         <div className='flex flex-row gap-x-[1.5vw] mt-4 sm:gap-x-14 sm:flex-wrap sm:justify-center'>
             {
-                stats.map((item)=>{
+                stats.map((item,i)=>{
                     return (
-                        <div className='sm:w-32'>
+                        <div key={i} className='sm:w-32'>
                             <h3 className='font-semibold text-4xl'>{item.title}</h3>
                             <p className='text-gray-500'>{item.subtitle}</p>
                         </div>

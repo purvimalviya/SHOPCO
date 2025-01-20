@@ -159,8 +159,8 @@ const Product: React.FC = () => {
               <p className='text-gray-600 text-sm'>Select Colour</p>
               <div className='flex flex-row gap-4'>
                 {
-                  prodItem.colors.map((_)=>
-                    <div className='rounded-full w-7 h-7 border-2 border-neutral-500' style={{ backgroundColor: _ }}></div>
+                  prodItem.colors.map((_,i)=>
+                    <div key={i} className='rounded-full w-7 h-7 border-2 border-neutral-500' style={{ backgroundColor: _ }}></div>
                   )
                 }
               </div>
@@ -170,8 +170,8 @@ const Product: React.FC = () => {
               <p className='text-gray-600 text-sm'>Select Size</p>
               <div className='flex flex-row gap-4'>
                 {
-                  prodItem.sizes.map((_)=>
-                    <RoundButton className='!text-gray-700 !bg-custom-gray' text={`${_}`} width={'auto'}></RoundButton>
+                  prodItem.sizes.map((_,i)=>
+                    <RoundButton key={i} className='!text-gray-700 !bg-custom-gray' text={`${_}`} width={'auto'}></RoundButton>
                   )
                 }
               </div>

@@ -6,6 +6,18 @@ import store from './store/store';
 import './index.css';
 import App from './App';
 
+if (import.meta.env.MODE !== 'production') {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      registrations.forEach((registration) => {
+        registration.unregister().then(() => {
+          console.log('Service Worker unregistered');
+        });
+      });
+    });
+  }
+}
+
 // Lazy load pages
 const Home = lazy(() => import('./pages/Home/Home'));
 const Product = lazy(() => import('./pages/Product/Product'));
@@ -13,7 +25,6 @@ const Cart = lazy(() => import('./pages/Cart/Cart'));
 const Signup = lazy(() => import('./pages/Signup/Signup'));
 const Shop = lazy(() => import('./pages/Shop/Shop'));
 
-// Import spinner
 import FullPageSpinner from './components/common/Spinner';
 
 const router = createBrowserRouter(
